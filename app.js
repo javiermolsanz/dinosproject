@@ -29,8 +29,20 @@ function Dino(species, weight, height, diet, where, when, fact) {
       )
     );
   });
-  console.log(dinoArray);
+  //console.log(dinoArray);
+  generateRandomFact(dinoArray);
 })();
+
+const generateRandomFact = dinoArray => {
+  const dinoNumber = Math.floor(Math.random() * dinoArray.length);
+  console.log(dinoArray[dinoNumber].fact);
+  //   Dino.prototype.getDiet = function() {
+  //     console.log(`The ${this.species} was ${this.diet}`);
+  //   };
+  //dinoArray[dinoNumber].getDiet();
+  // for (let i = 0; i< dinoArray.length; i++){
+  // }
+};
 
 // Create Human Object
 function Human(name, weight, inches, feet, diet) {
