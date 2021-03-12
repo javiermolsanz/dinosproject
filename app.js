@@ -12,8 +12,24 @@ function Dino(species, weight, height, diet, where, when, fact) {
 
 (async function generateDinoSpecs() {
   const dataJson = await fetch("./dino.json");
-  const spec = await dataJson.json();
-  console.log(spec);
+  const dinoData = await dataJson.json();
+  const dinoArray = [];
+  console.log(dinoData);
+  //spec.map(e => new Dino(e));
+  dinoData.Dinos.map(element => {
+    dinoArray.push(
+      new Dino(
+        element.species,
+        element.weight,
+        element.height,
+        element.diet,
+        element.where,
+        element.when,
+        element.fact
+      )
+    );
+  });
+  console.log(dinoArray);
 })();
 
 // Create Human Object
