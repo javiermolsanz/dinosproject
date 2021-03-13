@@ -100,7 +100,7 @@ const getData = async () => {
 };
 
 //const populateFacts =
-function populateFacts(dinos) {
+const populateFacts = dinos => {
   ({ dinoArray, human } = dinos);
   //console.log(dinos);
   dinoArray.forEach(dino => {
@@ -108,8 +108,20 @@ function populateFacts(dinos) {
     dino.dietFact(human.diet);
     dino.heightFact(human.height);
   });
+  return dinoArray;
   console.log(dinoArray);
-}
+};
+
+const addTiles = dinos => {
+  for (let i = 0; i < dinos.length; i++) {
+    if (i != 4) {
+      const dinoToShow = dinos[Math.floor(Math.random() * dinos.length)];
+      const factToShow =
+        dinoToShow.fact[Math.floor(Math.random() * dinoToShow.fact.length)];
+      console.log(dinoToShow.species, factToShow);
+    }
+  }
+};
 
 //usage:
 
@@ -135,7 +147,8 @@ button.addEventListener("click", function(e) {
   hideFormn();
   //this gets me human data
   getData().then(dino => {
-    populateFacts(dino);
+    const dinoWithFacts = populateFacts(dino);
+    addTiles(dinoWithFacts);
   });
 });
 
