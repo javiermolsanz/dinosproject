@@ -6,9 +6,46 @@ function Dino(species, weight, height, diet, where, when, fact) {
     (this.diet = diet),
     (this.where = where),
     (this.when = when),
-    (this.fact = fact);
+    (this.fact = [fact]);
 }
-// Create Dino Objects
+
+//comparison 1
+Dino.prototype.weightFact = function(humanWeight) {
+  if (this.weight > humanWeight) {
+    this.fact.push(
+      `This dino weighted ${this.weight - humanWeight} pounds more than you`
+    );
+  } else if (this.weight === humanWeight) {
+    this.fact.push(`I can't believe that you weight the same as this dino`);
+  } else {
+    this.fact.push(
+      `You weighted ${humanWeight - this.weight} pounds more than the dino`
+    );
+  }
+};
+
+//comparisson 2
+
+Dino.prototype.dietFact = function(humanDiet) {
+  const fact =
+    this.diet === humanDiet
+      ? `This dino had the same diet as you`
+      : `Unlike you, this dino had a ${this.diet} diet`;
+  this.fact.push(fact);
+};
+
+//
+Dino.prototype.heightFact = function(humanHeight) {
+  if (this.height > humanHeight) {
+    this.fact.push(`This dino was ${this.height - humanHeight} feet than you`);
+  } else if (this.height === humanHeight) {
+    this.fact.push(`I can't believe that you are as high this dino`);
+  } else {
+    this.fact.push(
+      `You are ${humanHeight - this.height} feet higher than the dino`
+    );
+  }
+};
 
 const generateRandomFact = dinoArray => {
   const dinoNumber = Math.floor(Math.random() * dinoArray.length);
@@ -67,12 +104,22 @@ const getData = async () => {
     human.inches = document.getElementById("inches").value;
     human.feet = document.getElementById("feet").value;
     human.diet = document.getElementById("diet").value;
+    human.height = human.inches + human.feet * 12;
 
     //it works only if using live server
     //return weight;
   })(human);
   console.log(human, dinoArray);
+  populateData(human, dinoArray)
+  dinoArray[2].weightFact(human.weight);
+  dinoArray[2].dietFact(human.diet);
+  dinoArray[2].heightFact(human.height);
+  console.log(dinoArray[2]);
 };
+
+const populateData = ()=>{
+for 
+}
 
 //usage:
 
