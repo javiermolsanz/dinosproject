@@ -10,29 +10,6 @@ function Dino(species, weight, height, diet, where, when, fact) {
 }
 // Create Dino Objects
 
-(async function generateDinoSpecs() {
-  const dataJson = await fetch("./dino.json");
-  const dinoData = await dataJson.json();
-  const dinoArray = [];
-  console.log(dinoData);
-  //spec.map(e => new Dino(e));
-  dinoData.Dinos.map(element => {
-    dinoArray.push(
-      new Dino(
-        element.species,
-        element.weight,
-        element.height,
-        element.diet,
-        element.where,
-        element.when,
-        element.fact
-      )
-    );
-  });
-  //console.log(dinoArray);
-  generateRandomFact(dinoArray);
-})();
-
 const generateRandomFact = dinoArray => {
   const dinoNumber = Math.floor(Math.random() * dinoArray.length);
   console.log(dinoArray[dinoNumber].fact);
@@ -55,7 +32,34 @@ function Human(name, weight, inches, feet, diet) {
 
 // Use IIFE to get human data from form
 
-const getData = () => {
+//function Animal (species, weight, fact) {this.species = species; this.weight = weight; this.fact = [fact]} this is the way to tgo
+
+// this alows me to create an array of facts
+///function Animal (species, weight, fact) {this.species = species; this.weight = weight; this.fact = [fact]}
+//animal = new Animal(object.species, object.weight, [object.fact])
+//Animal.prototype.weigthFact = function(){this.fact.push(`this animal weighted ${this.weight}`)}
+//animal.weigthFact()
+
+const getData = async () => {
+  //(async function generateDinoSpecs() {
+  const dataJson = await fetch("./dino.json");
+  const dinoData = await dataJson.json();
+  const dinoArray = [];
+
+  dinoData.Dinos.map(element => {
+    dinoArray.push(
+      new Dino(
+        element.species,
+        element.weight,
+        element.height,
+        element.diet,
+        element.where,
+        element.when,
+        element.fact
+      )
+    );
+  });
+
   const human = new Human();
   (function getHumanData() {
     human.name = document.getElementById("name").value;
@@ -63,11 +67,11 @@ const getData = () => {
     human.inches = document.getElementById("inches").value;
     human.feet = document.getElementById("feet").value;
     human.diet = document.getElementById("diet").value;
-    console.log(human);
 
     //it works only if using live server
     //return weight;
   })(human);
+  console.log(human, dinoArray);
 };
 
 //usage:
