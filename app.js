@@ -67,18 +67,7 @@ function Human(name, weight, inches, feet, diet) {
     (this.diet = diet);
 }
 
-// Use IIFE to get human data from form
-
-//function Animal (species, weight, fact) {this.species = species; this.weight = weight; this.fact = [fact]} this is the way to tgo
-
-// this alows me to create an array of facts
-///function Animal (species, weight, fact) {this.species = species; this.weight = weight; this.fact = [fact]}
-//animal = new Animal(object.species, object.weight, [object.fact])
-//Animal.prototype.weigthFact = function(){this.fact.push(`this animal weighted ${this.weight}`)}
-//animal.weigthFact()
-
 const getData = async () => {
-  //(async function generateDinoSpecs() {
   const dataJson = await fetch("./dino.json");
   const dinoData = await dataJson.json();
   const dinoArray = [];
@@ -97,6 +86,7 @@ const getData = async () => {
     );
   });
 
+  // Use IIFE to get human data from form
   const human = new Human();
   (function getHumanData() {
     human.name = document.getElementById("name").value;
@@ -105,20 +95,20 @@ const getData = async () => {
     human.feet = document.getElementById("feet").value;
     human.diet = document.getElementById("diet").value;
     human.height = human.inches + human.feet * 12;
-
-    //it works only if using live server
-    //return weight;
   })(human);
-  console.log(human, dinoArray);
-  populateData(human, dinoArray)
-  dinoArray[2].weightFact(human.weight);
-  dinoArray[2].dietFact(human.diet);
-  dinoArray[2].heightFact(human.height);
-  console.log(dinoArray[2]);
+  return { dinoArray, human };
 };
 
-const populateData = ()=>{
-for 
+//const populateFacts =
+function populateFacts(dinos) {
+  ({ dinoArray, human } = dinos);
+  //console.log(dinos);
+  dinoArray.forEach(dino => {
+    dino.weightFact(human.weight);
+    dino.dietFact(human.diet);
+    dino.heightFact(human.height);
+  });
+  console.log(dinoArray);
 }
 
 //usage:
@@ -141,10 +131,12 @@ const button = document.getElementById("btn");
 
 button.addEventListener("click", function(e) {
   e.preventDefault();
-  //this gets me human data
-  getData();
   // Remove form from screen
   hideFormn();
+  //this gets me human data
+  getData().then(dino => {
+    populateFacts(dino);
+  });
 });
 
 const hideFormn = () => {
