@@ -114,12 +114,26 @@ const populateFacts = dinos => {
 };
 
 const addTiles = dinos => {
-  for (let i = 0; i < dinos.length; i++) {
-    if (i != 4) {
+  const grid = document.getElementById("grid");
+  for (let i = 0; i <= dinos.length; i++) {
+    if (i === 4) {
+      const html = `<div class="grid-item">
+      <h3>Humano boring</h3>
+      <p>vaya paquete</p>
+      <img src="./images/human.png" alt="">
+      </div>`;
+      grid.insertAdjacentHTML("afterbegin", html);
+    } else {
       const dinoToShow = dinos[Math.floor(Math.random() * dinos.length)];
       const factToShow =
         dinoToShow.fact[Math.floor(Math.random() * dinoToShow.fact.length)];
       console.log(dinoToShow.species, factToShow);
+      const html = `<div class="grid-item">
+        <h3>${dinoToShow.species}</h3>
+        <p>${factToShow}</p>
+        <img src="./images/${dinoToShow.species}.png" alt="">
+        </div>`;
+      grid.insertAdjacentHTML("afterbegin", html);
     }
   }
 };
