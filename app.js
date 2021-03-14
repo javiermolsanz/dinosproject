@@ -102,14 +102,15 @@ const getData = async () => {
 //const populateFacts =
 const populateFacts = dinos => {
   ({ dinoArray, human } = dinos);
-  //console.log(dinos);
   dinoArray.forEach(dino => {
-    dino.weightFact(human.weight);
-    dino.dietFact(human.diet);
-    dino.heightFact(human.height);
+    if (dino.species != "Pigeon") {
+      dino.weightFact(human.weight);
+      dino.dietFact(human.diet);
+      dino.heightFact(human.height);
+    }
   });
-  return dinoArray;
   console.log(dinoArray);
+  return dinoArray;
 };
 
 const addTiles = dinos => {
