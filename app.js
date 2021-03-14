@@ -119,8 +119,14 @@ const addTiles = dinos => {
     if (i === 4) {
       const html = `<div class="grid-item">
       <h3>Humano boring</h3>
-      <p>vaya paquete</p>
       <img src="./images/human.png" alt="">
+      </div>`;
+      grid.insertAdjacentHTML("afterbegin", html);
+    } else if (i === 8) {
+      const html = `<div class="grid-item">
+      <h3>Pigeon</h3>
+      <img src="./images/Pigeon.png" alt="">
+      <p>All birds are considered dinosaurs</p>
       </div>`;
       grid.insertAdjacentHTML("afterbegin", html);
     } else {
