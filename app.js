@@ -1,4 +1,4 @@
-const compareMeBtn = document.getElementById("btn");
+//const compareMeBtn = document.getElementById("btn");
 const moreDataBtn = document.getElementById("generateFacts");
 
 //create constructor function
@@ -36,7 +36,6 @@ Dino.prototype.dietFact = function(humanDiet) {
       : `Unlike you, this dino had a ${this.diet} diet`;
   this.fact.push(fact);
 };
-
 //
 Dino.prototype.heightFact = function(humanHeight) {
   if (this.height > humanHeight) {
@@ -51,7 +50,6 @@ Dino.prototype.heightFact = function(humanHeight) {
     );
   }
 };
-
 // Create Human Object
 function Human(name, weight, inches, feet, diet) {
   (this.name = name),
