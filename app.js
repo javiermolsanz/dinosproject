@@ -140,19 +140,36 @@ button.addEventListener("click", function(e) {
   e.preventDefault();
   // Remove form from screen
   hideForm();
+  getDataandDisplay();
   //this gets me human data
-  getData().then(data => {
-    ({ dinoArray, human } = data);
-    const humanName = human.name;
-    const dinoWithFacts = populateFacts(dinoArray);
-    addTiles(dinoWithFacts, humanName);
-    moreDataBtn.style.display = "block";
-  });
+  //   getData().then(data => {
+  //     ({ dinoArray, human } = data);
+  //     const humanName = human.name;
+  //     const dinoWithFacts = populateFacts(dinoArray);
+  //     addTiles(dinoWithFacts, humanName);
+  //     moreDataBtn.style.display = "block";
+  //   });
 });
 
 moreDataBtn.addEventListener("click", function(e) {
   e.preventDefault();
   removeTiles(grid);
+  //   getData().then(data => {
+  //     ({ dinoArray, human } = data);
+  //     const humanName = human.name;
+  //     const dinoWithFacts = populateFacts(dinoArray);
+  //     addTiles(dinoWithFacts, humanName);
+  //     moreDataBtn.style.display = "block";
+  //   });
+  getDataandDisplay();
+});
+
+const hideForm = () => {
+  const form = document.getElementById("dino-compare");
+  form.style.display = "none";
+};
+
+const getDataandDisplay = () => {
   getData().then(data => {
     ({ dinoArray, human } = data);
     const humanName = human.name;
@@ -160,11 +177,6 @@ moreDataBtn.addEventListener("click", function(e) {
     addTiles(dinoWithFacts, humanName);
     moreDataBtn.style.display = "block";
   });
-});
-
-const hideForm = () => {
-  const form = document.getElementById("dino-compare");
-  form.style.display = "none";
 };
 
 const insertAt = (array, index, ...elementsArray) => {
