@@ -1,4 +1,4 @@
-//const compareMeBtn = document.getElementById("btn");
+const compareMeBtn = document.getElementById("btn");
 const moreDataBtn = document.getElementById("generateFacts");
 
 //create constructor function
