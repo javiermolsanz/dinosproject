@@ -84,15 +84,6 @@ const getData = async () => {
   })();
   humanData.getData();
   return { dinoArray, human };
-  //   (function getHumanData() {
-  //     human.name = document.getElementById("name").value;
-  //     human.weight = document.getElementById("weight").value;
-  //     human.inches = document.getElementById("inches").value;
-  //     human.feet = document.getElementById("feet").value;
-  //     human.diet = document.getElementById("diet").value;
-  //     human.height = human.inches + human.feet * 12;
-  //   })(human);
-  //   return { dinoArray, human };
 };
 
 //function that adds all possible random facts to all dinos but pigeon
