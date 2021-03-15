@@ -1,44 +1,56 @@
 const compareMeBtn = document.getElementById("btn");
 const moreDataBtn = document.getElementById("generateFacts");
 
-//create Dino functional mixin with the three comparissons
-function Dino(object) {
-  return Object.assign({}, object, {
-    weightFact: function(humanWeight) {
-      if (this.weight > humanWeight) {
-        this.fact.push(
-          `This dino weighted ${this.weight - humanWeight} pounds more than you`
-        );
-      } else if (this.weight === humanWeight) {
-        this.fact.push(`I can't believe that you weight the same as this dino`);
-      } else {
-        this.fact.push(
-          `You weighted ${humanWeight - this.weight} pounds more than this dino`
-        );
-      }
-    },
-    dietFact: function(humanDiet) {
-      const fact =
-        this.diet === humanDiet
-          ? `This dino had the same diet as you`
-          : `Unlike you, this dino had a ${this.diet} diet`;
-      this.fact.push(fact);
-    },
-    heightFact: function(humanHeight) {
-      if (this.height > humanHeight) {
-        this.fact.push(
-          `This dino was ${this.height - humanHeight} feet higher than you`
-        );
-      } else if (this.height === humanHeight) {
-        this.fact.push(`I can't believe that you are as high this dino`);
-      } else {
-        this.fact.push(
-          `You are ${humanHeight - this.height} feet higher than the dino`
-        );
-      }
-    }
-  });
+//create constructor function
+function Dino(species, weight, height, diet, where, when, fact) {
+  (this.species = species),
+    (this.weight = weight),
+    (this.height = height),
+    (this.diet = diet),
+    (this.where = where),
+    (this.when = when),
+    (this.fact = [fact]);
 }
+
+//comparison 1
+Dino.prototype.weightFact = function(humanWeight) {
+  if (this.weight > humanWeight) {
+    this.fact.push(
+      `This dino weighted ${this.weight - humanWeight} pounds more than you`
+    );
+  } else if (this.weight === humanWeight) {
+    this.fact.push(`I can't believe that you weight the same as this dino`);
+  } else {
+    this.fact.push(
+      `You weighted ${humanWeight - this.weight} pounds more than this dino`
+    );
+  }
+};
+
+//comparisson 2
+
+Dino.prototype.dietFact = function(humanDiet) {
+  const fact =
+    this.diet === humanDiet
+      ? `This dino had the same diet as you`
+      : `Unlike you, this dino had a ${this.diet} diet`;
+  this.fact.push(fact);
+};
+
+//
+Dino.prototype.heightFact = function(humanHeight) {
+  if (this.height > humanHeight) {
+    this.fact.push(
+      `This dino was ${this.height - humanHeight} feet higher than you`
+    );
+  } else if (this.height === humanHeight) {
+    this.fact.push(`I can't believe that you are as high this dino`);
+  } else {
+    this.fact.push(
+      `You are ${humanHeight - this.height} feet higher than the dino`
+    );
+  }
+};
 
 // Create Human Object
 function Human(name, weight, inches, feet, diet) {
@@ -56,15 +68,15 @@ const getData = async () => {
 
   dinoData.Dinos.map(element => {
     dinoArray.push(
-      Dino({
-        species: element.species,
-        weight: element.weight,
-        height: element.height,
-        diet: element.diet,
-        where: element.where,
-        when: element.when,
-        fact: [element.fact]
-      })
+      new Dino(
+        element.species,
+        element.weight,
+        element.height,
+        element.diet,
+        element.where,
+        element.when,
+        element.fact
+      )
     );
   });
 
