@@ -1,3 +1,4 @@
+const button = document.getElementById("btn");
 // Create Dino Constructor
 function Dino(species, weight, height, diet, where, when, fact) {
   (this.species = species),
@@ -47,17 +48,6 @@ Dino.prototype.heightFact = function(humanHeight) {
   }
 };
 
-const generateRandomFact = dinoArray => {
-  const dinoNumber = Math.floor(Math.random() * dinoArray.length);
-  console.log(dinoArray[dinoNumber].fact);
-  //   Dino.prototype.getDiet = function() {
-  //     console.log(`The ${this.species} was ${this.diet}`);
-  //   };
-  //dinoArray[dinoNumber].getDiet();
-  // for (let i = 0; i< dinoArray.length; i++){
-  // }
-};
-
 // Create Human Object
 function Human(name, weight, inches, feet, diet) {
   (this.name = name),
@@ -101,8 +91,8 @@ const getData = async () => {
 
 //const populateFacts =
 const populateFacts = dinos => {
-  ({ dinoArray, human } = dinos);
-  dinoArray.forEach(dino => {
+  //   ({ dinoArray, human } = dinos);
+  dinos.forEach(dino => {
     if (dino.species != "Pigeon") {
       dino.weightFact(human.weight);
       dino.dietFact(human.diet);
@@ -113,24 +103,28 @@ const populateFacts = dinos => {
   return dinoArray;
 };
 
-const addTiles = dinos => {
+const addTiles = (dinos, humanName) => {
   const grid = document.getElementById("grid");
+  console.log(humanName);
   for (let i = 0; i <= dinos.length; i++) {
     if (i === 4) {
       const html = `<div class="grid-item">
-      <h3>Humano boring</h3>
+      <h3>${humanName}</h3>
       <img src="./images/human.png" alt="">
       </div>`;
       grid.insertAdjacentHTML("afterbegin", html);
-    } else if (i === 8) {
-      const html = `<div class="grid-item">
-      <h3>Pigeon</h3>
-      <img src="./images/Pigeon.png" alt="">
-      <p>All birds are considered dinosaurs</p>
-      </div>`;
-      grid.insertAdjacentHTML("afterbegin", html);
-    } else {
-      const dinoToShow = dinos[Math.floor(Math.random() * dinos.length)];
+    } //else if (i === 8) {
+    //   const html = `<div class="grid-item">
+    //   <h3>Pigeon</h3>
+    //   <img src="./images/Pigeon.png" alt="">
+    //   <p>All birds are considered dinosaurs</p>
+    //   </div>`;
+    //   grid.insertAdjacentHTML("afterbegin", html);
+    // }
+    else {
+      //const dinoToShow = dinos[Math.floor(Math.random() * dinos.length)];
+      const dinoToShow = dinos[i];
+      console.log(dinoToShow);
       const factToShow =
         dinoToShow.fact[Math.floor(Math.random() * dinoToShow.fact.length)];
       console.log(dinoToShow.species, factToShow);
@@ -144,32 +138,16 @@ const addTiles = dinos => {
   }
 };
 
-//usage:
-
-// Create Dino Compare Method 1
-// NOTE: Weight in JSON file is in lbs, height in inches.
-
-// Create Dino Compare Method 2
-// NOTE: Weight in JSON file is in lbs, height in inches.
-
-// Create Dino Compare Method 3
-// NOTE: Weight in JSON file is in lbs, height in inches.
-
-// Generate Tiles for each Dino in Array
-
-// Add tiles to DOM
-
-// On button click, prepare and display infographic
-const button = document.getElementById("btn");
-
 button.addEventListener("click", function(e) {
   e.preventDefault();
   // Remove form from screen
   hideFormn();
   //this gets me human data
-  getData().then(dino => {
-    const dinoWithFacts = populateFacts(dino);
-    addTiles(dinoWithFacts);
+  getData().then(data => {
+    ({ dinoArray, human } = data);
+    const humanName = human.name;
+    const dinoWithFacts = populateFacts(dinoArray);
+    addTiles(dinoWithFacts, humanName);
   });
 });
 
