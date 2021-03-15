@@ -1,4 +1,5 @@
 const button = document.getElementById("btn");
+const moreDataBtn = document.getElementById("generateFacts");
 // Create Dino Constructor
 function Dino(species, weight, height, diet, where, when, fact) {
   (this.species = species),
@@ -20,7 +21,7 @@ Dino.prototype.weightFact = function(humanWeight) {
     this.fact.push(`I can't believe that you weight the same as this dino`);
   } else {
     this.fact.push(
-      `You weighted ${humanWeight - this.weight} pounds more than the dino`
+      `You weighted ${humanWeight - this.weight} pounds more than this dino`
     );
   }
 };
@@ -38,7 +39,9 @@ Dino.prototype.dietFact = function(humanDiet) {
 //
 Dino.prototype.heightFact = function(humanHeight) {
   if (this.height > humanHeight) {
-    this.fact.push(`This dino was ${this.height - humanHeight} feet than you`);
+    this.fact.push(
+      `This dino was ${this.height - humanHeight} feet higher than you`
+    );
   } else if (this.height === humanHeight) {
     this.fact.push(`I can't believe that you are as high this dino`);
   } else {
@@ -104,7 +107,7 @@ const populateFacts = dinos => {
 
 const addTiles = (dinos, humanName) => {
   const humanTile = {
-    species: "Human",
+    species: humanName,
     fact: "boring human"
   };
   insertAt(dinos, 4, humanTile);
@@ -119,12 +122,10 @@ const addTiles = (dinos, humanName) => {
       </div>`;
       grid.insertAdjacentHTML("afterbegin", html);
     } else {
-      //const dinoToShow = dinos[Math.floor(Math.random() * dinos.length)];
       const dinoToShow = dinos[i];
       console.log(dinoToShow);
       const factToShow =
         dinoToShow.fact[Math.floor(Math.random() * dinoToShow.fact.length)];
-      console.log(dinoToShow.species, factToShow);
       const html = `<div class="grid-item">
         <h3>${dinoToShow.species}</h3>
         <p>${factToShow}</p>
@@ -138,17 +139,29 @@ const addTiles = (dinos, humanName) => {
 button.addEventListener("click", function(e) {
   e.preventDefault();
   // Remove form from screen
-  hideFormn();
+  hideForm();
   //this gets me human data
   getData().then(data => {
     ({ dinoArray, human } = data);
     const humanName = human.name;
     const dinoWithFacts = populateFacts(dinoArray);
     addTiles(dinoWithFacts, humanName);
+    moreDataBtn.style.display = "block";
   });
 });
 
-const hideFormn = () => {
+// moreDataBtn.addEventListener("click", function(e) {
+//   e.preventDefault();
+//   getData().then(data => {
+//     ({ dinoArray, human } = data);
+//     const humanName = human.name;
+//     const dinoWithFacts = populateFacts(dinoArray);
+//     addTiles(dinoWithFacts, humanName);
+//     moreDataBtn.style.display = "block";
+//   });
+// });
+
+const hideForm = () => {
   const form = document.getElementById("dino-compare");
   form.style.display = "none";
 };
