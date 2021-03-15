@@ -65,29 +65,34 @@ const getData = async () => {
         when: element.when,
         fact: [element.fact]
       })
-      //   new Dino(
-      //     element.species,
-      //     element.weight,
-      //     element.height,
-      //     element.diet,
-      //     element.where,
-      //     element.when,
-      //     element.fact
-      //   )
     );
   });
 
   // Use IIFE to get human data from form
   const human = new Human();
-  (function getHumanData() {
-    human.name = document.getElementById("name").value;
-    human.weight = document.getElementById("weight").value;
-    human.inches = document.getElementById("inches").value;
-    human.feet = document.getElementById("feet").value;
-    human.diet = document.getElementById("diet").value;
-    human.height = human.inches + human.feet * 12;
-  })(human);
+  const humanData = (function() {
+    return {
+      getData: function() {
+        human.name = document.getElementById("name").value;
+        human.weight = document.getElementById("weight").value;
+        human.inches = document.getElementById("inches").value;
+        human.feet = document.getElementById("feet").value;
+        human.diet = document.getElementById("diet").value;
+        human.height = human.inches + human.feet * 12;
+      }
+    };
+  })();
+  humanData.getData();
   return { dinoArray, human };
+  //   (function getHumanData() {
+  //     human.name = document.getElementById("name").value;
+  //     human.weight = document.getElementById("weight").value;
+  //     human.inches = document.getElementById("inches").value;
+  //     human.feet = document.getElementById("feet").value;
+  //     human.diet = document.getElementById("diet").value;
+  //     human.height = human.inches + human.feet * 12;
+  //   })(human);
+  //   return { dinoArray, human };
 };
 
 //function that adds all possible random facts to all dinos but pigeon
