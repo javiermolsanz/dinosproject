@@ -150,16 +150,17 @@ button.addEventListener("click", function(e) {
   });
 });
 
-// moreDataBtn.addEventListener("click", function(e) {
-//   e.preventDefault();
-//   getData().then(data => {
-//     ({ dinoArray, human } = data);
-//     const humanName = human.name;
-//     const dinoWithFacts = populateFacts(dinoArray);
-//     addTiles(dinoWithFacts, humanName);
-//     moreDataBtn.style.display = "block";
-//   });
-// });
+moreDataBtn.addEventListener("click", function(e) {
+  e.preventDefault();
+  removeTiles(grid);
+  getData().then(data => {
+    ({ dinoArray, human } = data);
+    const humanName = human.name;
+    const dinoWithFacts = populateFacts(dinoArray);
+    addTiles(dinoWithFacts, humanName);
+    moreDataBtn.style.display = "block";
+  });
+});
 
 const hideForm = () => {
   const form = document.getElementById("dino-compare");
@@ -168,4 +169,10 @@ const hideForm = () => {
 
 const insertAt = (array, index, ...elementsArray) => {
   array.splice(index, 0, ...elementsArray);
+};
+
+const removeTiles = parent => {
+  while (parent.firstChild) {
+    parent.removeChild(parent.lastChild);
+  }
 };
