@@ -91,7 +91,6 @@ const getData = async () => {
 
 //const populateFacts =
 const populateFacts = dinos => {
-  //   ({ dinoArray, human } = dinos);
   dinos.forEach(dino => {
     if (dino.species != "Pigeon") {
       dino.weightFact(human.weight);
@@ -99,29 +98,27 @@ const populateFacts = dinos => {
       dino.heightFact(human.height);
     }
   });
-  console.log(dinoArray);
+  //console.log(dinoArray);
   return dinoArray;
 };
 
 const addTiles = (dinos, humanName) => {
+  const humanTile = {
+    species: "Human",
+    fact: "boring human"
+  };
+  insertAt(dinos, 4, humanTile);
+  console.log(dinos);
   const grid = document.getElementById("grid");
   console.log(humanName);
-  for (let i = 0; i <= dinos.length; i++) {
+  for (let i = 0; i < dinos.length; i++) {
     if (i === 4) {
       const html = `<div class="grid-item">
       <h3>${humanName}</h3>
       <img src="./images/human.png" alt="">
       </div>`;
       grid.insertAdjacentHTML("afterbegin", html);
-    } //else if (i === 8) {
-    //   const html = `<div class="grid-item">
-    //   <h3>Pigeon</h3>
-    //   <img src="./images/Pigeon.png" alt="">
-    //   <p>All birds are considered dinosaurs</p>
-    //   </div>`;
-    //   grid.insertAdjacentHTML("afterbegin", html);
-    // }
-    else {
+    } else {
       //const dinoToShow = dinos[Math.floor(Math.random() * dinos.length)];
       const dinoToShow = dinos[i];
       console.log(dinoToShow);
@@ -154,4 +151,8 @@ button.addEventListener("click", function(e) {
 const hideFormn = () => {
   const form = document.getElementById("dino-compare");
   form.style.display = "none";
+};
+
+const insertAt = (array, index, ...elementsArray) => {
+  array.splice(index, 0, ...elementsArray);
 };
