@@ -4,7 +4,7 @@ This projects is part of the Nanodegree program of Udemy for Intermediate Javasc
 
 ### Getting Started
 
-This project has a nodeJS express server to serve the dinos.json file as well as the public file.
+This project has a basic nodeJS express server to serve the dinos.json file as well as the public folder containing the front-end.
 
 In order to run it:
 
