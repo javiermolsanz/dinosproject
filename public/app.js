@@ -28,7 +28,6 @@ Dino.prototype.weightFact = function(humanWeight) {
 };
 
 //comparisson 2
-
 Dino.prototype.dietFact = function(humanDiet) {
   const fact =
     this.diet === humanDiet
@@ -36,7 +35,8 @@ Dino.prototype.dietFact = function(humanDiet) {
       : `Unlike you, this dino had a ${this.diet} diet`;
   this.fact.push(fact);
 };
-//
+
+//comparisson 3
 Dino.prototype.heightFact = function(humanHeight) {
   if (this.height > humanHeight) {
     this.fact.push(
@@ -50,6 +50,7 @@ Dino.prototype.heightFact = function(humanHeight) {
     );
   }
 };
+
 // Create Human Object
 function Human(name, weight, inches, feet, diet) {
   (this.name = name),
@@ -59,6 +60,7 @@ function Human(name, weight, inches, feet, diet) {
     (this.diet = diet);
 }
 
+//function to get dinos and human data
 const getData = async () => {
   const dataJson = await fetch("/dino.json");
   const dinoData = await dataJson.json();
@@ -137,7 +139,6 @@ const addTiles = (dinos, humanName) => {
 };
 
 //EVENT LISTENERS
-
 compareMeBtn.addEventListener("click", function(e) {
   e.preventDefault();
   hideForm();
