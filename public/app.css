@@ -141,6 +141,12 @@ input {
   background: #fff;
   border: 0;
 }
+input:invalid {
+  border: 2px dashed red;
+}
+input:invalid:required {
+  background-image: linear-gradient(to right, pink, lightgreen);
+}
 
 .form-field__short {
   width: 25%;
