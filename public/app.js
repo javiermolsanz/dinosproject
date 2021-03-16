@@ -119,7 +119,7 @@ const addTiles = (dinos, humanName) => {
     if (i === 4) {
       const html = `<div class="grid-item">
       <h3>${humanName}</h3>
-      <img src="./images/human.png" alt="">
+      <img src="public/images/human.png" alt="">
       </div>`;
       grid.insertAdjacentHTML("afterbegin", html);
     } else {
@@ -129,7 +129,7 @@ const addTiles = (dinos, humanName) => {
       const html = `<div class="grid-item">
         <h3>${dinoToShow.species}</h3>
         <p>${factToShow}</p>
-        <img src="./images/${dinoToShow.species}.png" alt="">
+        <img src="public/images/${dinoToShow.species}.png" alt="">
         </div>`;
       grid.insertAdjacentHTML("afterbegin", html);
     }
