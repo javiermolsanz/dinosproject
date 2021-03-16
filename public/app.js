@@ -109,6 +109,7 @@ const populateFacts = dinos => {
   });
   return dinoArray;
 };
+
 //function that appends the tiles to the dom.
 const addTiles = (dinos, humanName) => {
   const humanTile = {
